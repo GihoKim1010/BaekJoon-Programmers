@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.math.BigInteger;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
@@ -12,19 +13,19 @@ public class Main {
 
 		int L = Integer.parseInt(br.readLine());
 		String word = br.readLine();
-		int[] change = new int[L];
+		BigInteger[] change = new BigInteger[L];
 
-		for(int i=0; i<L; i++) {
-			int temp=(int) word.charAt(i)-'a'+1;
-			change[i]=temp*(int)Math.pow(31, i);
-		}
-		
-		int sum=0;
-		for(int x:change) {
-			sum +=x;
-		}
-		
-		bw.write(String.valueOf(sum%1234567891));
+		for (int i = 0; i < L; i++) {
+            int temp = (int) word.charAt(i) - 'a' + 1;
+            change[i] = BigInteger.valueOf(temp).multiply(BigInteger.valueOf(31).pow(i));
+        }
+
+        BigInteger sum = BigInteger.ZERO;
+        for (BigInteger x : change) {
+            sum = sum.add(x);
+        }
+
+        bw.write(String.valueOf(sum.mod(BigInteger.valueOf(1234567891))));
 		bw.newLine();
 		bw.flush();
 
