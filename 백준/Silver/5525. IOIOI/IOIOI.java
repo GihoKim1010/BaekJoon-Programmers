@@ -14,24 +14,37 @@ public class Main {
 		int N = Integer.parseInt(br.readLine());
 		int M = Integer.parseInt(br.readLine());
 		String S = br.readLine();
-
-		String target="I";
-		for(int i=0; i<N; i++) {
-			target +="OI";
-		}
-
+		int result = 0;
 		int count = 0;
-		int index = S.indexOf(target);
-		
-		while(index !=-1) {
-			count++;
-			index = S.indexOf(target, index+1);
+		int i = 0;
+
+		while (i + 2 < M) {
+			char temp = S.charAt(i);
+			if (temp == 'I') {
+				while (i+2<M) {
+					if (S.charAt(i + 1) == 'O' && S.charAt(i + 2) == 'I') {
+						count++;
+						i += 2;
+					}else {
+						i++;
+						break;
+					}
+				}
+			}else {
+				i++;
+			}
+
+			if (count >= N) {
+				result += count-N+1;
+				count=0;
+			}else {
+				count=0;
+			}
 		}
-		
-		bw.write(String.valueOf(count));
+
+		bw.write(String.valueOf(result));
 		bw.newLine();
 		bw.flush();
-
 		br.close();
 		bw.close();
 	}
