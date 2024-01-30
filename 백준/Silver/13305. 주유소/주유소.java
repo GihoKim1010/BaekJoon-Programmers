@@ -24,7 +24,7 @@ public class Main {
 		
 		for(int i=0; i<N-1; i++) {
 			min_price = Math.min(min_price, price[i]);
-			BigInteger temp = BigInteger.valueOf(min_price*distance[i]);
+			BigInteger temp = BigInteger.valueOf((long)min_price*distance[i]);
 			money = money.add(temp);
 		}
 		
